@@ -1,0 +1,280 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>기후위기한글 실험실</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one pinned scene where scrolling melts a phrase from 1979 to 2050, then the same phrase across five years, then example phrases as 1979 / 2050 pairs. */
+:root{
+  --bg:#F1F4F5; --surface:#E4EAEC; --ink:#0D1518; --muted:#5A6A70; --line:#C9D3D7;
+  --ice:#2A7FB8; --water:#4A93AE;
+  --f-display:"Black Han Sans","Noto Sans CJK KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --f-body:"IBM Plex Sans KR","Noto Sans CJK KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0B1113; --surface:#152024; --ink:#E8EFF1; --muted:#8FA1A7; --line:#27353B;
+  --ice:#6CB6E8; --water:#3F8CA3; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --bg:#0B1113; --surface:#152024; --ink:#E8EFF1; --muted:#8FA1A7; --line:#27353B;
+  --ice:#6CB6E8; --water:#3F8CA3; color-scheme:dark;}
+
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.6}
+.gutter{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.inner{max-width:1120px;margin:0 auto}
+a{color:inherit;text-decoration-color:var(--ice);text-underline-offset:3px}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--ice);outline-offset:3px}
+
+.plate svg{display:block;width:100%;height:100%;overflow:visible}
+.plate text{font-family:var(--f-display);font-weight:900;font-synthesis:none;fill:var(--ink);text-anchor:middle}
+.plate .puddle{fill:var(--water);fill-opacity:.28}
+.plate .ripple{fill:none;stroke:var(--water);stroke-opacity:.5;stroke-width:2}
+
+/* ---------- scroll scene ---------- */
+.scene{height:340vh;position:relative}
+.sticky{position:sticky;top:0;height:100vh;height:100svh;display:flex;flex-direction:column;box-sizing:border-box;padding-block:20px 24px}
+.bar{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.bar h1{font-family:var(--f-display);font-weight:900;font-synthesis:none;font-size:18px;margin:0}
+.bar span{font-family:var(--f-mono);font-size:12px;color:var(--muted);letter-spacing:.04em}
+#hero{flex:1;min-height:0;padding-block:12px}
+.read{display:grid;gap:10px}
+.read-top{display:flex;align-items:baseline;gap:6px 20px;flex-wrap:wrap}
+.yr{font-family:var(--f-display);font-weight:900;font-synthesis:none;font-size:clamp(40px,7vw,72px);line-height:1;font-variant-numeric:tabular-nums}
+.val{font-family:var(--f-mono);font-size:clamp(15px,1.8vw,19px);font-variant-numeric:tabular-nums}
+.val small{display:block;font-family:var(--f-body);font-size:12px;color:var(--muted)}
+.moment{margin-left:auto;font-size:14px;font-weight:500;color:var(--ice);min-height:1.6em}
+.prog{position:relative;height:30px}
+.prog .rail{position:absolute;left:0;right:0;top:6px;height:3px;background:var(--line);border-radius:2px}
+.prog .fill{position:absolute;left:0;top:6px;height:3px;background:var(--ice);border-radius:2px;width:0}
+.prog .now{position:absolute;top:2px;width:2px;height:11px;background:var(--muted)}
+.prog .lab{position:absolute;top:14px;font-family:var(--f-mono);font-size:11px;color:var(--muted);white-space:nowrap}
+.hint{font-size:13px;color:var(--muted);transition:opacity .3s}
+
+/* ---------- sections ---------- */
+section.sec{padding-block:72px;border-top:1px solid var(--line)}
+.sec h2{font-family:var(--f-display);font-weight:900;font-synthesis:none;font-size:clamp(28px,4.4vw,44px);line-height:1.15;margin:0 0 8px;text-wrap:balance}
+.sec .lede{margin:0 0 32px;color:var(--muted);max-width:60ch}
+
+.stack{display:grid;gap:4px}
+.row{display:grid;grid-template-columns:92px minmax(0,1fr) 120px;align-items:center;gap:16px;padding-block:6px;border-bottom:1px solid var(--line)}
+.row b{font-family:var(--f-mono);font-weight:500;font-size:15px;font-variant-numeric:tabular-nums}
+.row .plate{height:clamp(44px,8vw,92px)}
+.row small{font-family:var(--f-mono);font-size:12px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+
+.pairs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.pair{background:var(--surface);border-radius:12px;padding:16px;display:grid;gap:10px}
+.pair .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pair .side{display:grid;gap:4px}
+.pair .side .plate{aspect-ratio:1/0.82;max-width:100%;background:var(--bg);border-radius:8px;padding:8px;box-sizing:border-box}
+.pair .side span{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.pair button{justify-self:start;border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:7px 14px;font-size:13px;cursor:pointer}
+.pair button:hover{border-color:var(--ink)}
+.pair[aria-current="true"]{box-shadow:inset 0 0 0 2px var(--ice)}
+
+.mine{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 24px}
+.mine label{font-weight:600;font-size:14px}
+.mine input{flex:1;min-width:0;max-width:420px;padding:10px 14px;border:1px solid var(--line);border-radius:999px;background:var(--bg);font-family:var(--f-display);font-size:18px}
+.mine button{border:0;background:var(--ink);color:var(--bg);border-radius:999px;padding:10px 18px;font-weight:600;cursor:pointer}
+.mine small{flex-basis:100%;color:var(--muted);font-size:12px}
+
+footer{padding-block:28px 48px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+footer p{margin:0 0 4px;max-width:80ch}
+
+@media (max-width:720px){
+  .pairs{grid-template-columns:minmax(0,1fr)}
+  .row{grid-template-columns:54px minmax(0,1fr);gap:10px}
+  .row small{display:none}
+  .moment{margin-left:0;flex-basis:100%}
+}
+</style>
+
+<div class="scene" id="scene">
+  <div class="sticky gutter">
+    <div class="inner" style="width:100%;display:flex;flex-direction:column;height:100%">
+      <div class="bar"><h1>기후위기한글 · 녹아내리기</h1><span>스크롤 = 시간 · 1979 → 2050</span></div>
+      <div class="plate" id="hero"></div>
+      <div class="read">
+        <div class="read-top">
+          <span class="yr" id="yr">1979</span>
+          <span class="val" id="val">7.05 백만 km²<small>9월 북극 해빙 면적</small></span>
+          <span class="moment" id="moment"></span>
+        </div>
+        <div class="prog" id="prog"><i class="rail"></i><i class="fill" id="fill"></i></div>
+        <div class="hint" id="hint">아래로 스크롤하면 2050년까지 시간이 흐르며 글자가 녹습니다.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="sec gutter" aria-labelledby="s1">
+  <div class="inner">
+    <h2 id="s1">한 문구, 다섯 번의 9월</h2>
+    <p class="lede" id="stackLede">같은 문구에 해마다 측정된 북극 해빙 면적을 적용했습니다. 위에서 아래로 갈수록 얼음이 줄어든 해입니다.</p>
+    <div class="stack" id="stack"></div>
+  </div>
+</section>
+
+<section class="sec gutter" aria-labelledby="s2">
+  <div class="inner">
+    <h2 id="s2">예시 문구</h2>
+    <p class="lede">문구마다 1979년과 2050년을 나란히 놓았습니다. 마음에 드는 문구를 누르면 맨 위 스크롤 장면과 다섯 해 비교에 들어갑니다.</p>
+    <form class="mine" id="mine">
+      <label for="mineIn">내 문구</label>
+      <input id="mineIn" type="text" maxlength="40" placeholder="녹기 전에 / 지금">
+      <button type="submit">적용</button>
+      <small>/ 를 넣으면 줄이 바뀝니다. 한 줄에 10자까지.</small>
+    </form>
+    <div class="pairs" id="pairs"></div>
+  </div>
+</section>
+
+<footer class="gutter">
+  <div class="inner">
+    <p>원작 <a href="https://kampanjat.hs.fi/climatefont/" target="_blank" rel="noopener">Climate Crisis Font — Helsingin Sanomat</a> · 한글 <a href="https://nohtype.com/climate-crisis-font-hangul" target="_blank" rel="noopener">기후위기한글 — NohType</a></p>
+    <p>데이터: NSIDC 9월 북극 해빙 면적(1979–2024 측정), 2025년 이후는 IPCC 전망을 따른 근사 곡선. 글자 효과는 SVG 필터로 흉내 낸 스케치이며 실제 폰트 파일이 아닙니다.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+const NS='http://www.w3.org/2000/svg';
+const Y0=1979,Y1=2050,LAST=2024;
+const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
+const lerp=(a,b,t)=>a+(b-a)*t;
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const $=s=>document.querySelector(s);
+
+/* data: NSIDC September Arctic sea ice extent, million km² */
+const M=[7.05,7.67,7.14,7.30,7.39,6.81,6.70,7.41,7.28,7.37,7.01,6.14,6.47,7.47,6.40,7.14,6.08,7.58,6.69,6.54,6.12,6.25,6.73,5.83,6.12,5.98,5.50,5.86,4.27,4.69,5.26,4.87,4.56,3.57,5.21,5.22,4.62,4.53,4.82,4.79,4.36,3.92,4.92,4.87,4.37,4.28];
+const N=Y1-Y0+1;
+const ice=Array.from({length:N},(_,i)=>{const y=Y0+i;return y<=LAST?M[i]:4.28-(4.28-0.9)*Math.pow((y-LAST)/(Y1-LAST),1.25);});
+const smooth=ice.map((_,i)=>{let s=0,n=0;for(let k=i-2;k<=i+2;k++)if(k>=0&&k<N){s+=ice[k];n++;}return s/n;});
+const melt=(y,raw)=>clamp((7.0-(raw?ice:smooth)[y-Y0])/(7.0-0.9));
+const MOMENTS=[[1979,'위성 관측을 시작한 해'],[2007,'한 해 만에 크게 줄어든 해'],[2012,'관측 사상 가장 작았던 해'],[2013,''],[2024,'가장 최근 측정값'],[2025,'여기부터는 전망'],[2045,'여름 해빙이 거의 사라지는 시기']];
+const moment=y=>{let t='';MOMENTS.forEach(([a,s])=>{if(y>=a)t=s;});return t;};
+
+/* melting plate */
+let uid=0;
+class Plate{
+  constructor(host,{showYear=false,puddle=false,raw=false}={}){
+    this.host=host;this.raw=raw;this.showYear=showYear;this.puddle=puddle;this.id='p'+(uid++);this.year=Y0;
+    this.svg=document.createElementNS(NS,'svg');this.svg.setAttribute('role','img');host.appendChild(this.svg);
+  }
+  build(lines){
+    this.lines=lines;const id=this.id,FS=150,LH=172;let y=0,t='';
+    if(this.showYear){y=50;t+=`<text class="ylab" x="0" y="${y}" font-size="56">${this.year}년</text>`;y+=36;}
+    lines.forEach((l,k)=>{t+=`<text x="0" y="${y+FS*.86+k*LH}" font-size="${FS}">${esc(l)}</text>`;});
+    this.svg.innerHTML=`<g>${t}</g>`;
+    let bb;try{bb=this.svg.firstChild.getBBox();}catch(e){}
+    if(!bb||!bb.width)bb={x:-300,y:0,width:600,height:lines.length*LH+(this.showYear?86:0)};
+    this.bb=bb;const px=30,pt=24,pb=this.puddle?96:24;
+    this.svg.setAttribute('viewBox',`${bb.x-px} ${bb.y-pt} ${bb.width+px*2} ${bb.height+pt+pb}`);
+    const base=bb.y+bb.height,cx=bb.x+bb.width/2;
+    this.svg.innerHTML=`<defs><filter id="${id}f" x="-10%" y="-10%" width="120%" height="130%" color-interpolation-filters="sRGB">
+      <feMorphology class="ero" in="SourceGraphic" operator="erode" radius="0.01" result="a"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.01 0.035" numOctaves="2" seed="4" result="n"/>
+      <feDisplacementMap class="dsp" in="a" in2="n" scale="0" xChannelSelector="R" yChannelSelector="G" result="b"/>
+      <feGaussianBlur class="blr" in="b" stdDeviation="0.6" result="c"/>
+      <feColorMatrix in="c" type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 16 -6" result="g"/>
+      <feTurbulence type="turbulence" baseFrequency="0.0035 0.055" numOctaves="1" seed="11" result="k"/>
+      <feColorMatrix class="gap" in="k" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 40 0 0 0 40" result="mask"/>
+      <feComposite in="g" in2="mask" operator="in"/></filter></defs>
+      ${this.puddle?`<ellipse class="puddle" cx="${cx}" cy="${base+52}" rx="0" ry="0"/><ellipse class="ripple" cx="${cx}" cy="${base+52}" rx="0" ry="0"/>`:''}
+      <g filter="url(#${id}f)">${t}</g>`;
+    const q=s=>this.svg.querySelector(s);
+    this.e={ero:q('.ero'),dsp:q('.dsp'),blr:q('.blr'),gap:q('.gap'),pud:q('.puddle'),rip:q('.ripple'),ylab:q('.ylab')};
+    this.set(this.year);
+  }
+  set(year){
+    this.year=year;const m=melt(year,this.raw);const e=this.e;if(!e)return;
+    if(e.ylab)e.ylab.textContent=year+'년';
+    e.ero.setAttribute('radius',`${Math.max(.01,5*m).toFixed(2)} ${Math.max(.01,6.5*Math.pow(m,1.1)).toFixed(2)}`);
+    e.dsp.setAttribute('scale',(3+24*Math.pow(m,1.5)).toFixed(2));
+    e.blr.setAttribute('stdDeviation',(.5+1.3*m).toFixed(2));
+    const th=m<.5?-1:lerp(-.01,.035,(m-.5)/.5);
+    e.gap.setAttribute('values',`0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 40 0 0 0 ${(-40*th).toFixed(3)}`);
+    if(e.pud){const w=this.bb.width,rx=w*(.06+.5*m),ry=3+34*m;
+      e.pud.setAttribute('rx',rx.toFixed(1));e.pud.setAttribute('ry',ry.toFixed(1));
+      e.rip.setAttribute('rx',(rx*1.08).toFixed(1));e.rip.setAttribute('ry',(ry*1.25).toFixed(1));e.rip.style.opacity=m>.05?1:0;}
+    this.svg.setAttribute('aria-label',`${this.lines.join(' ')} · ${year}년`);
+  }
+}
+
+/* ---------- content ---------- */
+const EXAMPLES=[
+  ['기후위기','모두에게','큰문제야'],
+  ['빙하는','다시','얼지않아'],
+  ['북극곰의','집이','녹는다'],
+  ['얼음이','사라진','여름'],
+  ['녹기 전에','지금'],
+  ['내일은','오늘보다','늦다']
+];
+let phrase=EXAMPLES[0];
+const hero=new Plate($('#hero'),{showYear:true,puddle:true});
+const ROWS=[1979,2000,2012,2030,2050];
+const rows=ROWS.map(y=>{
+  const r=document.createElement('div');r.className='row';
+  r.innerHTML=`<b>${y}</b><div class="plate"></div><small>${ice[y-Y0].toFixed(2)}M km²${y>LAST?' 전망':''}</small>`;
+  $('#stack').appendChild(r);const p=new Plate(r.querySelector('.plate'),{raw:true});p.year=y;return p;
+});
+const reduce=matchMedia('(prefers-reduced-motion: reduce)');
+const pairs=EXAMPLES.map(lines=>{
+  const c=document.createElement('article');c.className='pair';
+  c.innerHTML=`<div class="two"><div class="side"><div class="plate"></div><span>1979 · 7.05M km²</span></div><div class="side"><div class="plate"></div><span>2050 · 0.90M km² 전망</span></div></div><button type="button">이 문구로 보기</button>`;
+  $('#pairs').appendChild(c);
+  const ps=c.querySelectorAll('.side .plate');const a=new Plate(ps[0]),b=new Plate(ps[1]);a.year=1979;b.year=2050;
+  c.querySelector('button').addEventListener('click',()=>{use(lines);scrollTo({top:0,behavior:reduce.matches?'auto':'smooth'});});
+  return {c,a,b,lines};
+});
+
+function use(lines){
+  phrase=lines;
+  hero.build(lines);rows.forEach(p=>p.build([lines.join(' ')]));
+  pairs.forEach(p=>p.c.setAttribute('aria-current',p.lines.join('/')===lines.join('/')?'true':'false'));
+  $('#stackLede').textContent=`“${lines.join(' ')}”에 해마다 측정된 북극 해빙 면적을 적용했습니다. 위에서 아래로 갈수록 얼음이 줄어든 해입니다.`;
+  apply(cur,true);
+}
+function buildAll(){use(phrase);pairs.forEach(p=>{p.a.build(p.lines);p.b.build(p.lines);});}
+
+/* ---------- scroll → year ---------- */
+const prog=$('#prog');
+[[1979,'1979'],[2024,'2024 측정 끝'],[2050,'2050']].forEach(([y,l])=>{
+  const p=(y-Y0)/(Y1-Y0);
+  prog.insertAdjacentHTML('beforeend',`<i class="now" style="left:${p*100}%"></i><span class="lab" style="left:${p*100}%;transform:translateX(${y===Y0?'0':y===Y1?'-100%':'-50%'})">${l}</span>`);
+});
+let target=0,cur=0,lastY=-1;
+function readScroll(){
+  const s=$('#scene'),r=s.getBoundingClientRect(),span=s.offsetHeight-innerHeight;
+  target=clamp(-r.top/Math.max(1,span*.92));
+}
+function apply(p,force){
+  const y=Math.round(lerp(Y0,Y1,p));
+  if(y!==lastY||force){
+    lastY=y;hero.set(y);
+    $('#yr').textContent=y;
+    $('#val').innerHTML=`${ice[y-Y0].toFixed(2)} 백만 km²<small>9월 북극 해빙 면적 · 1979년 대비 ${Math.round((ice[y-Y0]/ice[0]-1)*100)}%${y>LAST?' · 전망':''}</small>`;
+    $('#moment').textContent=moment(y);
+  }
+  $('#fill').style.width=(p*100).toFixed(2)+'%';
+  $('#hint').style.opacity=p>.03?0:1;
+}
+function loop(){
+  const d=target-cur;
+  if(Math.abs(d)>.0005){cur=reduce.matches?target:cur+d*.18;apply(cur);}
+  requestAnimationFrame(loop);
+}
+addEventListener('scroll',readScroll,{passive:true});
+addEventListener('resize',readScroll);
+$('#mine').addEventListener('submit',e=>{e.preventDefault();
+  const v=$('#mineIn').value.split('/').map(s=>s.trim().slice(0,10)).filter(Boolean).slice(0,4);
+  if(!v.length){$('#mineIn').focus();return;}
+  use(v);scrollTo({top:0,behavior:reduce.matches?'auto':'smooth'});});
+
+buildAll();readScroll();cur=target;apply(cur,true);requestAnimationFrame(loop);
+if(document.fonts)document.fonts.ready.then(buildAll);
+})();
+</script>
+
+</body></html>
